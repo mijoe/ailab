@@ -7,9 +7,15 @@
     "vscode": {
       "extensions": [
         "ms-python.python",
+        "ms-python.vscode-pylance",
         "ms-toolsai.jupyter",
         "continue.continue" // Great for local LLM integration
-      ]
+      ],
+        "settings": {
+          // Point this to the python binary in your container
+          "python.defaultInterpreterPath": "/usr/local/bin/python",
+          "python.terminal.activateEnvInSelectedTerminal": true
+        }
     }
   },
   "postCreateCommand": "pip install ollama langchain openai" 
