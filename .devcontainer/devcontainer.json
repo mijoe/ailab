@@ -1,0 +1,16 @@
+{
+  "name": "AI Engineering Lab",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "continue.continue" // Great for local LLM integration
+      ]
+    }
+  },
+  "postCreateCommand": "pip install ollama langchain openai" 
+}
