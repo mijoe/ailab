@@ -1,11 +1,14 @@
-# Use a lightweight Python image
 FROM mcr.microsoft.com/devcontainers/python:3.11
 
-# Optional: Install system dependencies for vector databases or data science
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
-    && rm -rf /var/lib/apt-get/lists/*
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip
-RUN pip install --upgrade pip
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
+    mv /root/.local/bin/uv /usr/local/bin/uv
+
+USER vscode
+WORKDIR /workspaces
