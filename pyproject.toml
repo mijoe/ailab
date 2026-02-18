@@ -12,6 +12,9 @@ dependencies = [
     "pydantic>=2.5.0",
     "jupyter>=1.0.0",
     "ipykernel>=6.28.0",
+    "llm",
+    "llm-ollama",
+    "llm-gpt4all",
 ]
 
 [dependency-groups]
