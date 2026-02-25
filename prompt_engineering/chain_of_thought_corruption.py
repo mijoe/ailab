@@ -4,6 +4,9 @@ from langchain_core.output_parsers import JsonOutputParser, PydanticOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from pydantic import BaseModel, Field
 from typing import Optional
+from langfuse.langchain import CallbackHandler
+
+langfuse_handler = CallbackHandler()
 
 # 0. Define a schema for error detection
 class LogicAudit(BaseModel):
@@ -46,7 +49,10 @@ def deliberately_corrupt(reasoning_text):
 # --- STEP 3: THE CHAIN ---
 # 1. Get reasoning
 question = "A store has 50 shirts. They sell 5. How many are left?"
-reasoning = (cot_prompt | model).invoke({"question": question}).content
+reasoning = (cot_prompt | model).invoke(
+    {"question": question},
+    config={"callbacks": [langfuse_handler]}
+).content
 print(reasoning)
 
 # 2. Corrupt it
@@ -59,10 +65,13 @@ for audit_model_name in audit_models:
     audit_model = ChatOllama(model=audit_model_name, temperature=0)
 
     try:
-        audit_result = (audit_prompt | audit_model | parser).invoke({
-            "reasoning": corrupted_reasoning,
-            "format_instructions": parser.get_format_instructions()
-        })
+        audit_result = (audit_prompt | audit_model | parser).invoke(
+            {
+                "reasoning": corrupted_reasoning,
+                "format_instructions": parser.get_format_instructions()
+            },
+            config={"callbacks": [langfuse_handler]}
+        )
     except Exception as e:
         print(f"Audit failed: {e}")
         audit_result = LogicAudit(
