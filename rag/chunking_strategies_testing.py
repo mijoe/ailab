@@ -28,6 +28,16 @@ docs = [
     Document(page_content=long_text, metadata={"source": file_path})
 ]
 
+pre_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000, 
+    chunk_overlap=100
+)
+intermediate_docs = pre_splitter.split_documents(docs)
+
 # Apply both to a long document
 chunks_a = recursive_splitter.split_documents(docs)
-chunks_b = semantic_splitter.split_documents(docs)
+chunks_b = semantic_splitter.split_documents(intermediate_docs)
+
+print(chunks_a[0])
+print(chunks_b[0])
+print(intermediate_docs[0])

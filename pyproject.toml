@@ -19,6 +19,9 @@ dependencies = [
     "langchain-ollama>=1.0.1",
     "langfuse>=3.14.5",
     "chromadb",
+    "unstructured[md]>=0.21.5",
+    "pypdf>=6.9.2",
+    "langchain-chroma>=1.1.0",
 ]
 
 [dependency-groups]
