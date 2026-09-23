@@ -197,3 +197,6 @@ result = rag.query("What is our policy on third-party vendor access?")
 print(result.answer)      # coherent answer
 print(result.citations)   # [{"source": "vendor_policy.pdf", "chunk_id": 3, "excerpt": "..."}]
 print(result.verified)    # True/False — did the LLM actually use these sources?
+
+result = rag.query("What do i need to know about the environment?")
+print(result.answer) 
