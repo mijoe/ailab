@@ -45,16 +45,23 @@ Chapter 2: Understanding Foundation Models.
 - Temperature experiment: the same question sampled at 0.0, 0.7 and 1.2
 - Validation adjusted for the smaller work-laptop GPU
 
+## [1.1.0] - 2026-02-15
+
+Chapter 1: Introduction to Building AI Applications with Foundation Models.
+
+- Local AI stack running: GPU passthrough, Python dev container, `uv` project
+- Environment validation and a first inference against Ollama
+
 ## [1.0.0] - 2026-02-15
 
-Phase 1 foundations: the lab environment.
+Phase 1 start: lab scaffold.
 
-- GPU-enabled dev container with Ollama
-- `uv` project, environment validation and Ollama smoke test
+- Dev container and Docker Compose setup with an Ollama service
 
 [1.6.1]: https://github.com/mijoe/ailab/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/mijoe/ailab/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/mijoe/ailab/compare/v1.2.1...v1.5.0
 [1.2.1]: https://github.com/mijoe/ailab/compare/v1.2.0...v1.2.1
-[1.2.0]: https://github.com/mijoe/ailab/compare/v1.0.0...v1.2.0
+[1.2.0]: https://github.com/mijoe/ailab/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/mijoe/ailab/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/mijoe/ailab/releases/tag/v1.0.0

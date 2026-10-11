@@ -155,7 +155,7 @@ The version shows where the lab stands in the learning path: `PHASE.CHAPTER.PATC
 | 2 | 5–8 | Evaluation + Agents + Production |
 | 3 | 9–12 | Fine-tuning + Optimization |
 
-`MINOR` is the actual book chapter number, so it can skip values (1.0 → 1.2 → 1.5 → 1.6) and keeps counting when the phase changes. A new phase starting with Chapter 7 is `2.7.0`, not `2.0.0`. `X.0.0` is used only for a phase milestone with no chapter attached, such as `1.0.0` for the environment setup.
+`MINOR` is the actual book chapter number, so it can skip values (1.2 → 1.5 → 1.6) and keeps counting when the phase changes. A new phase starting with Chapter 7 is `2.7.0`, not `2.0.0`. `X.0.0` is used only for a phase milestone with no chapter attached, such as `1.0.0` for the lab scaffold at the start of phase 1.
 
 Each release is an annotated git tag `vX.Y.Z`, the version in `pyproject.toml` matches the tag, and [CHANGELOG.md](CHANGELOG.md) lists the changes.
 
