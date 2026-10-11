@@ -181,16 +181,16 @@ uv run ollama_get_models.py
 ```
 $ docker compose -p ailab_devcontainer exec ollama ollama list
 NAME                        ID              SIZE      MODIFIED
-mxbai-embed-large:latest    468836162de7    669 MB    7 months ago
-llama-guard3:8b             46f211c3d866    4.9 GB    7 months ago
-qwen2.5:14b                 7cdf5a0187d5    9.0 GB    7 months ago
-ministral-3:14b             4760c35aeb9d    9.1 GB    7 months ago
-ministral-3:8b              1922accd5827    6.0 GB    7 months ago
-llama3.2:3b                 a80c4f17acd5    2.0 GB    7 months ago
+mxbai-embed-large:latest    468836162de7    669 MB    3 seconds ago
+qwen2.5:14b                 7cdf5a0187d5    9.0 GB    4 seconds ago
+llama-guard3:8b             46f211c3d866    4.9 GB    5 seconds ago
+ministral-3:14b             4760c35aeb9d    9.1 GB    6 seconds ago
+ministral-3:8b              1922accd5827    6.0 GB    7 seconds ago
+llama3.2:3b                 a80c4f17acd5    2.0 GB    8 seconds ago
 ```
 
 **Notes:**
-- **IDs are the source of truth, not tags.** `ollama pull <tag>` can silently replace the weights behind the same tag; a changed ID is the only way to notice. The weights above were pulled in March 2026 and deliberately not re-pulled, so they match what was validated. Compare `ollama list` against this table after any pull.
+- **IDs are the source of truth, not tags.** `ollama pull <tag>` can silently replace the weights behind the same tag; a changed ID is the only way to notice. The weights were first pulled in March 2026; all six were re-pulled on 2026-10-11 and every ID stayed the same, so they still match what was validated (`MODIFIED` only reflects the last pull, not a weights change). Compare `ollama list` against this table after any pull.
 - Pin explicit size tags in code (e.g. `ministral-3:8b`), never `:latest` — same floating-tag problem as `ollama/ollama:latest`. `ministral-3:latest` was an alias of `ministral-3:8b` (same ID `1922accd5827`); scripts were switched to `:8b` and the `:latest` tag removed (`ollama rm ministral-3:latest`). `mxbai-embed-large` is only published as `:latest`, so its ID is what pins it.
 - `ministral-3:14b`, `llama-guard3:8b` and `qwen2.5:14b` exceed the work laptop's 4GB VRAM — run `chain_of_thought_corruption.py`, `adversarial.py` and `chain_of_thought.py` on the home workstation
 - Commented-out alternatives in code (not pulled): `nomic-embed-text`, `bge-m3`
