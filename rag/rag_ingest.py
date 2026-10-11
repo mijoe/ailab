@@ -31,11 +31,17 @@ def ingest_docs():
         # Ensure 'source' is just the filename for cleaner citations
         chunk.metadata["source"] = os.path.basename(chunk.metadata.get("source", "unknown"))
 
-    # 4. Embed and Store
+    # 4. Embed and Store (idempotent: a second run must not change the state)
     embeddings = OllamaEmbeddings(model="mxbai-embed-large") # model="nomic-embed-text"
+    # from_documents() appends to an existing collection, so drop it first;
+    # otherwise chunks of removed/changed files would linger
+    Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings).delete_collection()
+    # Deterministic IDs: re-ingesting overwrites instead of storing duplicates
+    ids = [f"{chunk.metadata['source']}:{chunk.metadata['chunk_id']}" for chunk in chunks]
     db = Chroma.from_documents(
-        chunks, 
-        embeddings, 
+        chunks,
+        embeddings,
+        ids=ids,
         persist_directory=CHROMA_PATH
     )
     
