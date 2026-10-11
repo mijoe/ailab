@@ -144,6 +144,21 @@ $ docker compose -p ailab_devcontainer logs ollama
 
 > `latest` is a floating tag — re-check the version after every `docker pull`, or pin `ollama/ollama:0.40.3` in `docker-compose.yml` for reproducibility.
 
+**Loaded RAG models (Home Workstation, 2026-10-11):**
+
+Snapshot taken while the RAG pipeline (`rag/`) was active — generation model and embedding model resident together:
+
+```
+$ docker compose -p ailab_devcontainer exec ollama ollama ps
+NAME                        ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL
+llama3.2:3b                 a80c4f17acd5    2.6 GB    100% GPU     4096       llamacpp    4 minutes from now
+mxbai-embed-large:latest    468836162de7    618 MB    100% GPU     512        llamacpp    4 minutes from now
+```
+
+- Both models fully offloaded to the RTX 5080 (`100% GPU`), ~3.2 GB VRAM combined
+- `llama3.2:3b` runs with a 4096-token context; `mxbai-embed-large` with 512 tokens (its max input length — longer chunks get truncated)
+- `UNTIL` reflects Ollama's default 5-minute keep-alive; models unload after idling (tune with `OLLAMA_KEEP_ALIVE` or the `keep_alive` request parameter)
+
 ---
 
 ## WSL2 GPU Configuration (Home Workstation)
@@ -703,6 +718,7 @@ Expect 5-10x slower inference, but environment remains functional.
 - ✅ Refreshed RTX 5080 driver info from `nvidia-smi`: KMD 617.14 / nvidia-smi 615.78.02, CUDA UMD 13.4 (was 591.86 / 590.57, CUDA 13.1)
 - ✅ Added latest `nvidia-smi` snapshot
 - ✅ Documented Ollama version 0.40.3 (`ollama/ollama:latest`, digest `sha256:adca95a1…`), verified by starting the container; RTX 5080 detected via CUDA (cuda_v13 libs)
+- ✅ Added `ollama ps` snapshot of RAG models (`llama3.2:3b` + `mxbai-embed-large`), both 100% on GPU
 
 **2026-02-16 (Evening - Home Workstation):**
 - ✅ Added RTX 5080 specifications (16GB VRAM, 10,752 CUDA cores)
