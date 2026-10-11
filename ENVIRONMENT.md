@@ -124,13 +124,13 @@
 - Virtual environments via uv
 
 **AI Infrastructure:**
-- Ollama 0.40.3 - local model inference (image `ollama/ollama:latest` from `.devcontainer/docker-compose.yml`)
+- Ollama 0.40.3 - local model inference (image `ollama/ollama:0.40.3`, pinned in `.devcontainer/docker-compose.yml`)
 - LangChain - orchestration framework
 - ChromaDB / FAISS - vector stores (TBD based on project needs)
 
 **Ollama version evidence (Home Workstation, 2026-10-11):**
 
-Image: `ollama/ollama:latest` @ `sha256:adca95a12c2b386a8f9a995e7fa0600e187e3323b5e5522f5a6c3b1ec73eff99` (built 2026-10-11T04:08:01Z)
+Image: `ollama/ollama:0.40.3` @ `sha256:adca95a12c2b386a8f9a995e7fa0600e187e3323b5e5522f5a6c3b1ec73eff99` (built 2026-10-11T04:08:01Z)
 
 ```
 $ docker compose -p ailab_devcontainer up -d ollama
@@ -142,7 +142,7 @@ $ docker compose -p ailab_devcontainer logs ollama
 ... msg="inference compute" id=0 filter_id=0 library=CUDA compute=12.0 name=CUDA0 description="NVIDIA GeForce RTX 5080" libdirs=ollama,cuda_v13 driver=13.4 pci_id=0000:2d:00.0 type=discrete total="15.9 GiB" available="14.6 GiB"
 ```
 
-> `latest` is a floating tag — re-check the version after every `docker pull`, or pin `ollama/ollama:0.40.3` in `docker-compose.yml` for reproducibility.
+> The image is pinned to the version tag `ollama/ollama:0.40.3` (not `:latest`). To upgrade, change the tag in `docker-compose.yml` deliberately, then re-run the version check above and update this section.
 
 **Loaded RAG models (Home Workstation, 2026-10-11):**
 
@@ -191,7 +191,7 @@ llama3.2:3b                 a80c4f17acd5    2.0 GB    8 seconds ago
 
 **Notes:**
 - **IDs are the source of truth, not tags.** `ollama pull <tag>` can silently replace the weights behind the same tag; a changed ID is the only way to notice. The weights were first pulled in March 2026; all six were re-pulled on 2026-10-11 and every ID stayed the same, so they still match what was validated (`MODIFIED` only reflects the last pull, not a weights change). Compare `ollama list` against this table after any pull.
-- Pin explicit size tags in code (e.g. `ministral-3:8b`), never `:latest` — same floating-tag problem as `ollama/ollama:latest`. `ministral-3:latest` was an alias of `ministral-3:8b` (same ID `1922accd5827`); scripts were switched to `:8b` and the `:latest` tag removed (`ollama rm ministral-3:latest`). `mxbai-embed-large` is only published as `:latest`, so its ID is what pins it.
+- Pin explicit size tags in code (e.g. `ministral-3:8b`), never `:latest` — same floating-tag problem the Ollama image had before it was pinned to `0.40.3`. `ministral-3:latest` was an alias of `ministral-3:8b` (same ID `1922accd5827`); scripts were switched to `:8b` and the `:latest` tag removed (`ollama rm ministral-3:latest`). `mxbai-embed-large` is only published as `:latest`, so its ID is what pins it.
 - `ministral-3:14b`, `llama-guard3:8b` and `qwen2.5:14b` exceed the work laptop's 4GB VRAM — run `chain_of_thought_corruption.py`, `adversarial.py` and `chain_of_thought.py` on the home workstation
 - Commented-out alternatives in code (not pulled): `nomic-embed-text`, `bge-m3`
 
@@ -753,6 +753,7 @@ Expect 5-10x slower inference, but environment remains functional.
 **2026-10-11 (Home Workstation):**
 - ✅ Refreshed RTX 5080 driver info from `nvidia-smi`: KMD 617.14 / nvidia-smi 615.78.02, CUDA UMD 13.4 (was 591.86 / 590.57, CUDA 13.1)
 - ✅ Added latest `nvidia-smi` snapshot
+- ✅ Pinned Ollama image to `ollama/ollama:0.40.3` (was `:latest`, same digest)
 - ✅ Documented Ollama version 0.40.3 (`ollama/ollama:latest`, digest `sha256:adca95a1…`), verified by starting the container; RTX 5080 detected via CUDA (cuda_v13 libs)
 - ✅ Added `ollama ps` snapshot of RAG models (`llama3.2:3b` + `mxbai-embed-large`), both 100% on GPU
 - ✅ Documented all Ollama models used in code ("Required Ollama Models"); `ollama_get_models.py` now pulls all of them (dropped unused `qwen3:32b-q4_K_M`)
