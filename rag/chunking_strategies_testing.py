@@ -2,7 +2,7 @@ from langchain_core.documents import Document
 from langchain_ollama import OllamaEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 
 # Use the best local embedding model for Ollama
 embeddings = OllamaEmbeddings(model="mxbai-embed-large")
