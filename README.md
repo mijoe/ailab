@@ -139,6 +139,28 @@ LANGFUSE_HOST=...
 
 ---
 
+## Versioning
+
+The version shows where the lab stands in the learning path: `PHASE.CHAPTER.PATCH`.
+
+| Part | Meaning | Bump when |
+|------|---------|-----------|
+| `PHASE` (major) | Curriculum phase from the [12-week program](ENVIRONMENT.md#learning-path-context) | A new phase starts; reset the other parts |
+| `CHAPTER` (minor) | Book chapter the lab has reached | A chapter's experiments are complete |
+| `PATCH` | Fixes, docs, dependency or model updates | Anything that adds no new chapter content |
+
+| Phase | Weeks | Focus |
+|-------|-------|-------|
+| 1 | 1–4 | Foundations + RAG |
+| 2 | 5–8 | Evaluation + Agents + Production |
+| 3 | 9–12 | Fine-tuning + Optimization |
+
+`MINOR` is the actual book chapter number, so it can skip values (1.0 → 1.5 → 1.6) and keeps counting when the phase changes. A new phase starting with Chapter 7 is `2.7.0`, not `2.0.0`. `X.0.0` is used only for a phase milestone with no chapter attached, such as `1.0.0` for the environment setup.
+
+Each release is an annotated git tag `vX.Y.Z`, the version in `pyproject.toml` matches the tag, and [CHANGELOG.md](CHANGELOG.md) lists the changes.
+
+---
+
 ## Security Boundaries
 
 This is a learning lab. Use only synthetic or public data. Never put production API keys or customer data here. The full rules for each machine are in [ENVIRONMENT.md](ENVIRONMENT.md#security-boundaries).

@@ -670,22 +670,22 @@ uv run validate_environment.py
 
 This environment supports the 12-week AI Engineering learning program:
 
-**Weeks 1-4:** Foundations + RAG  
+**Phase 1 (v1.x), Weeks 1-4:** Foundations + RAG  
 - Work laptop sufficient
 - Small models (3B) adequate
 - Focus on concepts, not scale
 
-**Weeks 5-8:** Evaluation + Agents + Production  
+**Phase 2 (v2.x), Weeks 5-8:** Evaluation + Agents + Production  
 - Work laptop primary
 - Home for larger experiments
 - Multi-model testing
 
-**Weeks 9-12:** Fine-tuning + Optimization  
+**Phase 3 (v3.x), Weeks 9-12:** Fine-tuning + Optimization  
 - Home workstation required
 - GPU memory critical
 - Larger datasets needed
 
-**Current Status:** Week 1 complete, Week 2 starting (2026-02-16)
+**Current Status:** v1.6.1, Phase 1, Chapters 5 (Prompt Engineering) and 6 (RAG) complete (2026-10-11). The version scheme is described in [README.md](README.md#versioning).
 
 ---
 
