@@ -71,7 +71,7 @@ def test_ollama_connection():
             print(f"     - {model_name} ({param_size})")
 
         if len(models) == 0:
-            print("  ⚠️  No models found. Run: ollama pull ministral-3:latest")
+            print("  ⚠️  No models found. Run: ollama pull ministral-3:8b")
             return False
 
         return True

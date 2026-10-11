@@ -5,7 +5,7 @@ print(client.list())
 
 # Test 2: Simple inference
 response = ollama.chat(
-    model='ministral-3:latest',
+    model='ministral-3:8b',
     messages=[{'role': 'user', 'content': 'Say "Connected"'}]
 )
 print(response['message']['content'])

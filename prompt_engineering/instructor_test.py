@@ -6,7 +6,7 @@ class Person(BaseModel):
     age: int
     occupation: str
 
-client = instructor.from_provider("ollama/llama3-2-3b")
+client = instructor.from_provider("ollama/llama3.2:3b")
 
 person = client.create(
     response_model=Person,

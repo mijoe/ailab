@@ -159,6 +159,44 @@ mxbai-embed-large:latest    468836162de7    618 MB    100% GPU     512        ll
 - `llama3.2:3b` runs with a 4096-token context; `mxbai-embed-large` with 512 tokens (its max input length — longer chunks get truncated)
 - `UNTIL` reflects Ollama's default 5-minute keep-alive; models unload after idling (tune with `OLLAMA_KEEP_ALIVE` or the `keep_alive` request parameter)
 
+### Required Ollama Models
+
+Models actually referenced in the code (commented-out alternatives excluded). Pull all of them with:
+
+```bash
+uv run ollama_get_models.py
+```
+
+| Model tag | ID | Type | Used in |
+|-----------|----|------|---------|
+| `llama3.2:3b` | `a80c4f17acd5` | Chat/generation | `temperature_experiment.py`, `validate_environment.py`, `prompt_engineering/output_format.py`, `prompt_engineering/provide_examples.py`, `prompt_engineering/instructor_test.py`, `rag/rag_integration.py` |
+| `ministral-3:8b` | `1922accd5827` | Chat/generation | `test_ollama.py`, `validate_environment.py` (pull hint), `prompt_engineering/adopt_persona.py`, `prompt_engineering/chain_of_thought_corruption.py` (reasoning) |
+| `ministral-3:14b` | `4760c35aeb9d` | Chat/generation | `prompt_engineering/adversarial.py`, `prompt_engineering/chain_of_thought.py`, `prompt_engineering/chain_of_thought_corruption.py` (audit) |
+| `llama-guard3:8b` | `46f211c3d866` | Safety classifier | `prompt_engineering/chain_of_thought_corruption.py` (audit) |
+| `qwen2.5:14b` | `7cdf5a0187d5` | Chat/generation | `prompt_engineering/chain_of_thought_corruption.py` (audit) |
+| `mxbai-embed-large:latest` | `468836162de7` | Embeddings (512-token max input) | `rag/rag_ingest.py`, `rag/rag_integration.py`, `rag/similarity_search.py`, `rag/chunking_strategies_testing.py` |
+
+**Installed models (Home Workstation, 2026-10-11):**
+
+```
+$ docker compose -p ailab_devcontainer exec ollama ollama list
+NAME                        ID              SIZE      MODIFIED
+mxbai-embed-large:latest    468836162de7    669 MB    7 months ago
+llama-guard3:8b             46f211c3d866    4.9 GB    7 months ago
+qwen2.5:14b                 7cdf5a0187d5    9.0 GB    7 months ago
+ministral-3:14b             4760c35aeb9d    9.1 GB    7 months ago
+ministral-3:3b              f04aa1c738f6    3.0 GB    7 months ago
+ministral-3:8b              1922accd5827    6.0 GB    7 months ago
+llama3.2:3b                 a80c4f17acd5    2.0 GB    7 months ago
+```
+
+**Notes:**
+- **IDs are the source of truth, not tags.** `ollama pull <tag>` can silently replace the weights behind the same tag; a changed ID is the only way to notice. The weights above were pulled in March 2026 and deliberately not re-pulled, so they match what was validated. Compare `ollama list` against this table after any pull.
+- Pin explicit size tags in code (e.g. `ministral-3:8b`), never `:latest` — same floating-tag problem as `ollama/ollama:latest`. `ministral-3:latest` was an alias of `ministral-3:8b` (same ID `1922accd5827`); scripts were switched to `:8b` and the `:latest` tag removed (`ollama rm ministral-3:latest`). `mxbai-embed-large` is only published as `:latest`, so its ID is what pins it.
+- `ministral-3:3b` is installed but not referenced in code (candidate for the work laptop's 4GB VRAM; not pulled by `ollama_get_models.py`)
+- `ministral-3:14b`, `llama-guard3:8b` and `qwen2.5:14b` exceed the work laptop's 4GB VRAM — run `chain_of_thought_corruption.py`, `adversarial.py` and `chain_of_thought.py` on the home workstation
+- Commented-out alternatives in code (not pulled): `nomic-embed-text`, `bge-m3`
+
 ---
 
 ## WSL2 GPU Configuration (Home Workstation)
@@ -719,6 +757,9 @@ Expect 5-10x slower inference, but environment remains functional.
 - ✅ Added latest `nvidia-smi` snapshot
 - ✅ Documented Ollama version 0.40.3 (`ollama/ollama:latest`, digest `sha256:adca95a1…`), verified by starting the container; RTX 5080 detected via CUDA (cuda_v13 libs)
 - ✅ Added `ollama ps` snapshot of RAG models (`llama3.2:3b` + `mxbai-embed-large`), both 100% on GPU
+- ✅ Documented all Ollama models used in code ("Required Ollama Models"); `ollama_get_models.py` now pulls all of them (dropped unused `qwen3:32b-q4_K_M`)
+- ✅ Added `ollama list` snapshot with model IDs; replaced floating `ministral-3:latest` with `ministral-3:8b` in `test_ollama.py` / `validate_environment.py` and removed the `:latest` tag
+- ✅ Fixed invalid model name in `prompt_engineering/instructor_test.py` (`llama3-2-3b` → `llama3.2:3b`)
 
 **2026-02-16 (Evening - Home Workstation):**
 - ✅ Added RTX 5080 specifications (16GB VRAM, 10,752 CUDA cores)
