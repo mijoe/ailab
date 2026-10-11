@@ -124,9 +124,25 @@
 - Virtual environments via uv
 
 **AI Infrastructure:**
-- Ollama (latest) - local model inference
+- Ollama 0.40.3 - local model inference (image `ollama/ollama:latest` from `.devcontainer/docker-compose.yml`)
 - LangChain - orchestration framework
 - ChromaDB / FAISS - vector stores (TBD based on project needs)
+
+**Ollama version evidence (Home Workstation, 2026-10-11):**
+
+Image: `ollama/ollama:latest` @ `sha256:adca95a12c2b386a8f9a995e7fa0600e187e3323b5e5522f5a6c3b1ec73eff99` (built 2026-10-11T04:08:01Z)
+
+```
+$ docker compose -p ailab_devcontainer up -d ollama
+$ docker compose -p ailab_devcontainer exec ollama ollama --version
+ollama version is 0.40.3
+
+$ docker compose -p ailab_devcontainer logs ollama
+... msg="Listening on [::]:11434 (version 0.40.3)"
+... msg="inference compute" id=0 filter_id=0 library=CUDA compute=12.0 name=CUDA0 description="NVIDIA GeForce RTX 5080" libdirs=ollama,cuda_v13 driver=13.4 pci_id=0000:2d:00.0 type=discrete total="15.9 GiB" available="14.6 GiB"
+```
+
+> `latest` is a floating tag — re-check the version after every `docker pull`, or pin `ollama/ollama:0.40.3` in `docker-compose.yml` for reproducibility.
 
 ---
 
@@ -686,6 +702,7 @@ Expect 5-10x slower inference, but environment remains functional.
 **2026-10-11 (Home Workstation):**
 - ✅ Refreshed RTX 5080 driver info from `nvidia-smi`: KMD 617.14 / nvidia-smi 615.78.02, CUDA UMD 13.4 (was 591.86 / 590.57, CUDA 13.1)
 - ✅ Added latest `nvidia-smi` snapshot
+- ✅ Documented Ollama version 0.40.3 (`ollama/ollama:latest`, digest `sha256:adca95a1…`), verified by starting the container; RTX 5080 detected via CUDA (cuda_v13 libs)
 
 **2026-02-16 (Evening - Home Workstation):**
 - ✅ Added RTX 5080 specifications (16GB VRAM, 10,752 CUDA cores)
