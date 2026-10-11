@@ -1,6 +1,6 @@
 # Changelog
 
-Versions follow `PHASE.CHAPTER.PATCH`, which tracks progress through the curriculum and the book. See [Versioning](README.md#versioning).
+Versions follow `PHASE.CHAPTER.PATCH`, which tracks progress through the curriculum and the book (Chip Huyen, *AI Engineering*, O'Reilly 2025). See [Versioning](README.md#versioning).
 
 ## [1.6.1] - 2026-10-11
 
@@ -31,15 +31,30 @@ Chapter 5: Prompt Engineering.
 - Chain-of-thought corruption with audit models, traced with Langfuse
 - Reusable LLM security review prompts
 
-## [1.0.0] - 2026-02-18
+## [1.2.1] - 2026-02-18
+
+Environment docs and tooling after Chapter 2.
+
+- Added ENVIRONMENT.md (hardware profiles, WSL2 GPU setup, troubleshooting)
+- Added the `llm` CLI with the Ollama plugin
+
+## [1.2.0] - 2026-02-16
+
+Chapter 2: Understanding Foundation Models.
+
+- Temperature experiment: the same question sampled at 0.0, 0.7 and 1.2
+- Validation adjusted for the smaller work-laptop GPU
+
+## [1.0.0] - 2026-02-15
 
 Phase 1 foundations: the lab environment.
 
 - GPU-enabled dev container with Ollama
-- Temperature experiment, environment validation and docs
-- `llm` CLI with the Ollama plugin
+- `uv` project, environment validation and Ollama smoke test
 
 [1.6.1]: https://github.com/mijoe/ailab/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/mijoe/ailab/compare/v1.5.0...v1.6.0
-[1.5.0]: https://github.com/mijoe/ailab/compare/v1.0.0...v1.5.0
+[1.5.0]: https://github.com/mijoe/ailab/compare/v1.2.1...v1.5.0
+[1.2.1]: https://github.com/mijoe/ailab/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/mijoe/ailab/compare/v1.0.0...v1.2.0
 [1.0.0]: https://github.com/mijoe/ailab/releases/tag/v1.0.0
