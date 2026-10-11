@@ -1,6 +1,6 @@
 # AI Lab Environment Documentation
 
-**Last Updated:** 2026-02-16  
+**Last Updated:** 2026-10-11  
 **Maintainer:** Michael Jörg
 
 ---
@@ -48,9 +48,23 @@
 **VRAM:** 16,303 MiB (~16GB)  
 **CUDA Cores:** 10,752 (Blackwell architecture)  
 **TDP:** 360W  
-**Driver Version:** 591.86 (Windows host) / 590.57 (WSL2 passthrough)  
-**CUDA Version:** 13.1  
-**Architecture:** Blackwell (5th gen RTX)
+**Driver Version:** 617.14 KMD (Windows host) / 615.78.02 (WSL2 nvidia-smi)  
+**CUDA Version:** 13.4 (UMD)  
+**Architecture:** Blackwell (5th gen RTX)  
+**Bus ID:** 00000000:2D:00.0
+
+**Latest `nvidia-smi` snapshot (2026-10-11, idle):**
+```
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 615.78.02              KMD Version: 617.14        CUDA UMD Version: 13.4     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5080        On  |   00000000:2D:00.0  On |                  N/A |
+|  0%   37C    P8             16W /  360W |    1506MiB /  16303MiB |      1%      Default |
++-----------------------------------------+------------------------+----------------------+
+```
 
 **WSL2 GPU Notes:**
 - GPU accessed via Windows driver passthrough
@@ -122,13 +136,13 @@
 
 **Architecture:**
 ```
-Windows Host (Driver 591.86)
+Windows Host (KMD 617.14)
     ↓
 WSL2 Virtual Machine (Kernel 6.6.87.2)
     ↓
 NVIDIA Container Toolkit
     ↓
-Docker Containers (CUDA 13.1)
+Docker Containers (CUDA ≤13.4)
     ↓
 Ollama / PyTorch / TensorFlow
 ```
@@ -143,7 +157,7 @@ Ollama / PyTorch / TensorFlow
 
 **Already Configured (Assumed):**
 - ✅ WSL2 installed and updated
-- ✅ NVIDIA GPU driver on Windows (591.86)
+- ✅ NVIDIA GPU driver on Windows (KMD 617.14)
 - ✅ CUDA support enabled in WSL2
 - ✅ Docker Desktop with WSL2 backend
 
@@ -668,6 +682,10 @@ Expect 5-10x slower inference, but environment remains functional.
 ---
 
 ## Changelog
+
+**2026-10-11 (Home Workstation):**
+- ✅ Refreshed RTX 5080 driver info from `nvidia-smi`: KMD 617.14 / nvidia-smi 615.78.02, CUDA UMD 13.4 (was 591.86 / 590.57, CUDA 13.1)
+- ✅ Added latest `nvidia-smi` snapshot
 
 **2026-02-16 (Evening - Home Workstation):**
 - ✅ Added RTX 5080 specifications (16GB VRAM, 10,752 CUDA cores)
