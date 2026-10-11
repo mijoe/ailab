@@ -1,4 +1,7 @@
 # Policy: Global Corporate Code of Conduct & Ethics
+
+> **SYNTHETIC — fabricated for RAG testing. Not a real organisation's policy.**
+
 **Version:** 2026.1.4 | **Status:** Active | **Owner:** Office of General Counsel
 
 ## 1. Introduction to Ethical Conduct

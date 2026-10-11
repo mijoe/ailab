@@ -1,4 +1,7 @@
 # Policy: Environmental Health and Safety (EHS) Framework
+
+> **SYNTHETIC — fabricated for RAG testing. Not a real organisation's policy.**
+
 **Effective Date:** Jan 2026 | **Scope:** Global Facilities | **Version:** 4.1
 
 ## 1. Purpose

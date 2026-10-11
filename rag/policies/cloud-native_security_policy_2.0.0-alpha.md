@@ -1,4 +1,7 @@
 # Cloud-Native Security Policy (CNSP)
+
+> **SYNTHETIC — fabricated for RAG testing. Not a real organisation's policy.**
+
 **Document ID:** SEC-POL-2026-002  
 **Version:** 2.0.0-Alpha  
 **Status:** DRAFT (Testing Only)  

@@ -1,4 +1,7 @@
 # Enterprise Information Security Policy (EISP)
+
+> **SYNTHETIC — fabricated for RAG testing. Not a real organisation's policy.**
+
 **Document ID:** SEC-POL-2026-001  
 **Version:** 1.1.0  
 **Status:** RELEASED  

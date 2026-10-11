@@ -1,4 +1,7 @@
 # Policy Addendum: Legacy Vendor Exceptions
+
+> **SYNTHETIC — fabricated for RAG testing. Not a real organisation's policy.**
+
 **Document ID:** SEC-ADD-2026-001  
 **Version:** 1.0.0  
 **Effective Date:** January 01, 2026  

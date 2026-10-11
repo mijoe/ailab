@@ -22,6 +22,7 @@ dependencies = [
     "unstructured[md]>=0.21.5",
     "pypdf>=6.9.2",
     "langchain-chroma>=1.1.0",
+    "langchain-experimental>=0.4.1",
 ]
 
 [dependency-groups]

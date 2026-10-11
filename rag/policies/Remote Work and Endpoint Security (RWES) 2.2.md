@@ -1,4 +1,7 @@
 # Policy: Remote Work and Endpoint Security (RWES)
+
+> **SYNTHETIC — fabricated for RAG testing. Not a real organisation's policy.**
+
 **ID:** SEC-RW-2026 | **Classification:** Internal | **Version:** 2.2
 
 ## 1. Scope and Applicability
