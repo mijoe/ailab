@@ -1,3 +1,6 @@
 .env
 .venv
 rag/db/*
+# VS Code: ignore personal settings, keep shareable recommendations
+.vscode/*
+!.vscode/extensions.json
